@@ -139,7 +139,7 @@ def upload_image():
             break
         time.sleep(1)
     
-    time.sleep(30)
+    #time.sleep(30)
 
 def main():
     upload_image()
