@@ -37,7 +37,7 @@ def sharp_time():
                         picture = sel.get_random_file("C:/Users/random_gui/Pictures")
                         if is_image_pillow(picture):
                             break
-                exit_code =subprocess.run(["upload_image.bat", picture, message])
+                exit_code =subprocess.run(["upload_image.sh", picture, message])
                 print("Exit Code:", exit_code)
                 
         time.sleep(60) #seconds
