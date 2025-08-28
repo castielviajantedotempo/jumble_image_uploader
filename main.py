@@ -4,6 +4,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from pathlib import Path
 import subprocess
 import json
@@ -35,6 +37,7 @@ def check_exists_by_class(webdriver,Class):
     return True
 
 def upload_image():
+    #usage: python main.py <file_path> <message>
     file_path = sys.argv[1]
     message = sys.argv[2]
     user_nsec = os.environ['USER_NSEC']
@@ -51,6 +54,7 @@ def upload_image():
     navegador=webdriver.Chrome(service=servico, options=options)
 
     navegador.get("https://jumble.social/")
+    wait = WebDriverWait(navegador, 10) # waits for a maximum of 10 seconds
 	
 	#Login Page
     for x in range(10):
@@ -135,7 +139,8 @@ def upload_image():
 
     for x in range(10):
         if check_exists_by_xpath(navegador, '//div[contains(@role,"dialog")]//button[contains(@type, "submit")]'):
-            navegador.find_element(By.XPATH, '//div[contains(@role,"dialog")]//button[contains(@type, "submit")]').click()
+            submit = wait.until(EC.element_to_be_clickable((By.XPATH, '//div[contains(@role,"dialog")]//button[contains(@type, "submit")]')))
+            submit.click()
             break
         time.sleep(1)
     
