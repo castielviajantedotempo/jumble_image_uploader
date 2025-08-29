@@ -143,8 +143,10 @@ def upload_image():
             submit.click()
             break
         time.sleep(1)
-    
-    #time.sleep(30)
+
+    #Closing Browser
+    time.sleep(10)
+    navegador.quit()
 
 def main():
     upload_image()
