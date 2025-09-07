@@ -53,13 +53,21 @@ def upload_image():
 
     navegador=webdriver.Chrome(service=servico, options=options)
 
+    regional_settings = {
+        'enter_button': 'Entrar',
+	    'config_button': 'Configurações',
+	    'post_settings': 'Configurações de Postagem',
+	    'cancel_button': 'Cancelar'
+	}
+
     navegador.get("https://jumble.social/")
-    wait = WebDriverWait(navegador, 10) # waits for a maximum of 10 seconds
+    navegador.set_window_size(1024, 768)
+    wait = WebDriverWait(navegador, 20) # waits for a maximum of 10 seconds
 	
 	#Login Page
     for x in range(10):
-        if check_exists_by_xpath(navegador, '//button[@title="Entrar"]'):
-            navegador.find_element(By.XPATH, '//button[@title="Entrar"]').click()
+        if check_exists_by_xpath(navegador, '//button[@title="'+regional_settings['enter_button']+'"]'):
+            navegador.find_element(By.XPATH, '//button[@title="'+regional_settings['enter_button']+'"]').click()
             break
         time.sleep(1)
 
